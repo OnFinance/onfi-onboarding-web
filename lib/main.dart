@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:onboarding_web_onfi/src/features/authentication/landingpage.dart';
+
+import 'package:onboarding_web_onfi/src/features/authentication/screens/authcheck.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,8 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LandingPage(title: 'Flutter Demo Home Page'),
+      home: AuthChecker(),
     );
   }
 }
-
