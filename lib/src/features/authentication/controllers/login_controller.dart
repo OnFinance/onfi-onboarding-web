@@ -1,4 +1,3 @@
-
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:onboarding_web_onfi/src/features/authentication/controllers/login_state.dart';
 import 'package:onboarding_web_onfi/src/features/authentication/providers/providers.dart';
@@ -17,6 +16,7 @@ class LoginController extends StateNotifier<LoginState> {
           );
       state = const LoginStateSuccess();
     } catch (e) {
+      print(e);
       state = LoginStateError(e.toString());
     }
   }
