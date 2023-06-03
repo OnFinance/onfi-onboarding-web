@@ -9,9 +9,30 @@ import '../features/home/screens/home_main.dart';
 
 class MyAppRoutes {
   GoRouter router = GoRouter(routes: [
+    // GoRoute(
+    //     name: "main",
+    //     path: "/",
+    //     builder: (context, state) => const HomeMain(),
+    //     routes: <RouteBase>[
+    //       GoRoute(
+    //         name: "home",
+    //         path: "home",
+    //         builder: (context, state) => const HomePage(),
+    //       ),
+    //       GoRoute(
+    //         name: "settings",
+    //         path: "settings",
+    //         builder: (context, state) =>  SettingsPage(),
+    //       ),
+    //       // GoRoute(
+    //       //   name: "account_detail_step",
+    //       //   path: "account_detail_step",
+    //       //   builder: (context, state) => const TestPage(),
+    //       // ),
+    //     ]),
     GoRoute(
         name: "/authchecker",
-        path: '/auth',
+        path: '/',
         pageBuilder: (context, state) {
           return const MaterialPage(child: AuthChecker());
         }),
@@ -21,17 +42,29 @@ class MyAppRoutes {
         pageBuilder: (context, state) {
           return const MaterialPage(child: LoginScreen());
         }),
+    // GoRoute(
+    //     name: "/mainhome",
+    //     path: '/',
+    //     pageBuilder: (context, state) {
+    //       return const MaterialPage(child: HomeMain());
+    //     }),
     GoRoute(
         name: "/home",
-        path: '/',
+        path: '/home',
         pageBuilder: (context, state) {
-          return const MaterialPage(child: HomeMain());
+          return MaterialPage(
+              child: HomeMain(
+            pagename: "/#/home",
+          ));
         }),
     GoRoute(
         name: "/settings",
         path: '/settings',
         pageBuilder: (context, state) {
-          return const MaterialPage(child: SettingPage());
+          return MaterialPage(
+              child: HomeMain(
+            pagename: "/#/settings",
+          ));
         }),
   ]);
 }

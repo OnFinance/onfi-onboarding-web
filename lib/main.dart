@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:onboarding_web_onfi/src/features/authentication/screens/authcheck.dart';
 import 'package:onboarding_web_onfi/src/routes/app_route_config.dart';
 import 'package:onboarding_web_onfi/src/utils/firebse_options.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 void main() async {
   await Firebase.initializeApp(
@@ -16,6 +17,7 @@ void main() async {
           messagingSenderId: "498057028376",
           appId: "1:498057028376:web:af7cef9bdd5d206a7cb46d",
           measurementId: "G-HLR3EGPJTL"));
+   //        setPathUrlStrategy();
   runApp(const ProviderScope(child: MyApp()));
 }
 

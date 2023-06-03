@@ -30,7 +30,7 @@ class SplitView extends ConsumerWidget {
             ),
             InkWell(
                 onTap: () {
-                  ref.read(selectedPageNameProvider.state).state = "Second Page";
+                //  ref.read(selectedPageNameProvider.state).state = "Second Page";
                 },
                 child: Container(width: 0.5, color: Colors.black)),
             Expanded(child: content),

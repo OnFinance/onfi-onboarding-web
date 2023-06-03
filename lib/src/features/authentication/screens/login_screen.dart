@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:onboarding_web_onfi/src/features/authentication/controllers/login_controller.dart';
 
@@ -30,7 +31,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           padding: const EdgeInsets.all(10),
           child: ListView(
             children: <Widget>[
-        
               Container(
                   alignment: Alignment.center,
                   padding: const EdgeInsets.all(10),
@@ -73,9 +73,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   child: ElevatedButton(
                     child: const Text('Login'),
                     onPressed: () {
-                      ref
-                          .read(loginControllerProvider.notifier)
-                          .login(emailController.text, passwordController.text);
+                      print("yess");
+                      GoRouter.of(context).pushReplacementNamed("/#/home");
+                      // ref
+                      //     .read(loginControllerProvider.notifier)
+                      //     .login(emailController.text, passwordController.text);
                     },
                   )),
               Row(

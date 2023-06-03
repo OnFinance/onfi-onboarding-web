@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:onboarding_web_onfi/src/features/home/screens/first_page.dart';
-import 'package:onboarding_web_onfi/src/features/home/screens/second_page.dart';
+import 'package:onboarding_web_onfi/src/features/home/screens/homepage.dart';
 
 import 'dart:html' as html;
+
+import '../../settings/screens/setting_screen.dart';
+
 // a map of ("page name", WidgetBuilder) pairs
 final _availablePages = <String, WidgetBuilder>{
-  'First Page': (_) => FirstPage(),
-  'Second Page': (_) => SecondPage(),
+  '/#/home': (_) => HomePage(),
+  '/#/settings': (_) => SettingsPage(),
 };
 
 // make this a `StateProvider` so we can change its value
@@ -23,12 +26,22 @@ final selectedPageBuilderProvider = Provider<WidgetBuilder>((ref) {
   return _availablePages[selectedPageKey]!;
 });
 
-// 1. extend from ConsumerWidget
-class AppMenu extends ConsumerWidget {
+class AppMenu extends ConsumerStatefulWidget {
+  AppMenu({super.key, required this.pageName});
+  String pageName;
+
+  @override
+  ConsumerState<AppMenu> createState() => _AppMenuState();
+}
+
+class _AppMenuState extends ConsumerState<AppMenu> {
   void _selectPage(BuildContext context, WidgetRef ref, String pageName) {
     if (ref.read(selectedPageNameProvider.state).state != pageName) {
       //  html.window.history.pushState({}, '', '/${pageName}');
+
+      html.window.history.pushState({}, '', pageName);
       ref.read(selectedPageNameProvider.state).state = pageName;
+
       // dismiss the drawer of the ancestor Scaffold if we have one
       if (Scaffold.maybeOf(context)?.hasDrawer ?? false) {
         Navigator.of(context).pop();
@@ -37,9 +50,22 @@ class AppMenu extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // 2. watch the provider's state
+  void initState() {
+    // TODO: implement initState
+    // setState(() {
+    //  ref.read(selectedPageNameProvider.notifier).state = widget.pageName;
+    // });
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      ref.read(selectedPageNameProvider.notifier).state = widget.pageName;
+    });
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final selectedPageName = ref.watch(selectedPageNameProvider.state).state;
+
     return Scaffold(
       appBar: AppBar(title: Text('Menu')),
       body: ListView(
